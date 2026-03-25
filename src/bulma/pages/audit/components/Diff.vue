@@ -115,8 +115,8 @@ const afterChanges = computed(() => parseData(props.changes?.after));
 const attributes = computed(() => parseData(props.changes));
 </script>
 
-<style>
-.popper{
-    min-width: 10em;
+<style lang="scss">
+.popper {
+    min-width: 35em;
 }
 </style>

@@ -2,7 +2,10 @@
     <EnsoTable class="box is-paddingless raises-on-hover"
         id="audits">
         <template #changes="{ row }">
-            <diff :event="row.event" :changes="row.changes"/>
+            <div class="is-flex is-justify-content-center">
+                <Diff :event="row.event"
+                    :changes="row.changes"/>
+            </div>
         </template>
         <template #createdBy="{ row }">
             <Avatar class="is-24x24"
