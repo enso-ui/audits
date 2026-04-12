@@ -1,5 +1,5 @@
 <template>
-    <EnsoTable class="box is-paddingless raises-on-hover"
+    <EnsoTable class="box p-0"
         id="audits">
         <template #changes="{ row }">
             <div class="is-flex is-justify-content-center">
@@ -21,6 +21,3 @@ import { EnsoTable } from '@enso-ui/tables/bulma';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
 import Diff from './components/Diff.vue';
 </script>
-
-<style lang="scss">
-</style>

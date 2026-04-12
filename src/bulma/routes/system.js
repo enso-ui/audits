@@ -1,13 +1,8 @@
 import routeImporter from '@enso-ui/ui/src/modules/importers/routeImporter';
 
-const routes = routeImporter(require.context('./system', false, /.*\.js$/));
-const RouterView = () => import('@enso-ui/ui/src/bulma/pages/Router.vue');
+const routes = routeImporter.fromGlob(import.meta.glob('./system/*.js', { eager: true }));
 
 export default {
     path: '/system',
-    component: RouterView,
-    meta: {
-        breadcrumb: 'system',
-    },
     children: routes,
 };

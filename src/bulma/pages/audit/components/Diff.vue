@@ -3,16 +3,16 @@
         <template #popper>
             <div class="m-0 p-0 popper">
                 <div v-if="event === auditEvent.Updated * 1">
-                    <div class="has-background-light p-2">
+                    <div class="p-2 audit-popover-header">
                         <h6 class="title is-6 m-0">
-                             {{ i18n("Updated") }}
+                            {{ i18n('Updated') }}
                         </h6>
                     </div>
                     <div class="columns is-mobile m-0 is-gapless">
                         <div class="column is-half p-3 has-background-danger-light
                             has-text-danger-dark">
                             <div class="mb-2 has-text-weight-bold is-size-6">
-                                 {{ i18n("Before") }}
+                                {{ i18n('Before') }}
                             </div>
                             <div
                                 v-for="(value, key) in beforeChanges"
@@ -25,7 +25,7 @@
                         <div class="column is-half p-3 has-background-success-light
                             has-text-success-dark">
                             <div class="mb-2 has-text-weight-bold is-size-6">
-                                 {{ i18n("After") }}
+                                {{ i18n('After') }}
                             </div>
                             <div
                                 v-for="(value, key) in afterChanges"
@@ -40,7 +40,7 @@
                 <div v-else-if="event === auditEvent.Created * 1"
                     class="has-background-success-light has-text-success-dark p-2">
                     <div class="mb-2 has-text-weight-bold is-size-6">
-                        {{ i18n("Created") }}
+                        {{ i18n('Created') }}
                     </div>
                     <div
                         v-for="(value, key) in attributes"
@@ -53,7 +53,7 @@
                 <div v-else-if="event === auditEvent.Deleted * 1"
                     class="has-background-danger-light has-text-danger-dark p-2">
                         <div class="mb-2 has-text-weight-bold is-size-6">
-                            {{ i18n("Deleted") }}
+                            {{ i18n('Deleted') }}
                         </div>
                         <div
                             v-for="(value, key) in attributes"
@@ -69,18 +69,18 @@
             <span class="icon is-small mr-1">
                 <Fa icon="eye"/>
             </span>
-            <span class="is-size-7 has-text-weight-semibold">Vezi modificari</span>
+            <span class="is-size-7 has-text-weight-semibold">{{ i18n('View changes') }}</span>
         </span>
     </Dropdown>
 </template>
 
 <script setup>
-import { computed, defineProps, inject } from 'vue';
-import { useStore } from 'vuex';
+import { computed, inject } from 'vue';
 import { Dropdown } from 'v-tooltip';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { useStore } from '../../../../utils/pinia';
 
 library.add(faEye);
 
@@ -97,8 +97,7 @@ const props = defineProps({
 
 const i18n = inject('i18n');
 
-const store = useStore();
-const { auditEvent } = store.state.enums;
+const auditEvent = useStore('enums').enums.auditEvent;
 
 const parseData = data => {
     if (typeof data === 'string') {
@@ -118,5 +117,9 @@ const attributes = computed(() => parseData(props.changes));
 <style lang="scss">
 .popper {
     min-width: 35em;
+}
+
+.audit-popover-header {
+    background-color: var(--bulma-card-header-background-color);
 }
 </style>

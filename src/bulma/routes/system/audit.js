@@ -1,14 +1,15 @@
 import routeImporter from '@enso-ui/ui/src/modules/importers/routeImporter';
 
-const routes = routeImporter(require.context('./audit', false, /.*\.js$/));
-const RouterView = () => import('@enso-ui/ui/src/bulma/pages/Router.vue');
+const routes = routeImporter.fromGlob(import.meta.glob('./audit/*.js', { eager: true }));
+const Router = () => import('@enso-ui/ui/src/bulma/pages/Router.vue');
 
 export default {
     path: 'audit',
-    component: RouterView,
+    component: Router,
     meta: {
         breadcrumb: 'audit',
         route: 'system.audit.index',
+        keepAlive: false,
     },
     children: routes,
 };
