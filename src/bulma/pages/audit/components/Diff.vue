@@ -76,8 +76,8 @@
 
 <script setup>
 import { computed, inject } from 'vue';
-import { enums } from '@enso-ui/enums/src/pinia/enums';
 import { Dropdown } from 'v-tooltip';
+import { enums as useEnums } from '@enso-ui/enums/src/pinia/enums';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -97,7 +97,7 @@ const props = defineProps({
 
 const i18n = inject('i18n');
 
-const auditEvent = enums().enums.auditEvent;
+const auditEvent = useEnums().enums.auditEvent;
 
 const parseData = data => {
     if (typeof data === 'string') {
