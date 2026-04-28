@@ -1,4 +1,4 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardCheck, faPoll } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faClipboardCheck);
+library.add(faClipboardCheck, faPoll);
