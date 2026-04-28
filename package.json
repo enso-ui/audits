@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/audits",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Audit table pages and diff presenters for Enso UI.",
   "main": "src/bulma/pages/audit/Index.vue",
   "repository": {
@@ -29,6 +29,8 @@
     "v-tooltip": "^4.0.0-beta.2"
   },
   "peerDependencies": {
+    "@enso-ui/enums": "^2.1.0",
+    "@enso-ui/filters": "^3.3.0",
     "@enso-ui/tables": "^4.1.0",
     "@enso-ui/ui": "^7.1.0",
     "@enso-ui/users": "^3.1.0",
@@ -38,6 +40,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
     "@enso-ui/enums": "^2.1.0",
+    "@enso-ui/filters": "^3.3.0",
     "@enso-ui/tables": "^4.1.0",
     "@enso-ui/ui": "^7.1.0",
     "@enso-ui/users": "^3.1.0",
