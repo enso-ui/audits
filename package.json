@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/audit",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Audit table pages and diff presenters for Enso UI.",
   "main": "src/bulma/pages/audit/Index.vue",
   "repository": {

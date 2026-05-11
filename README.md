@@ -12,7 +12,7 @@
 
 ## Description
 
-Audit table pages and diff presenters for Enso UI.
+Audit table pages, model filters and change presenters for Enso UI.
 
 ## Installation
 
@@ -27,7 +27,10 @@ This package is also available through the full `enso-ui` workspace bundle.
 ## Features
 
 - exports the audit index page used by the system route group
-- renders row-level change payloads through the reusable `Diff` component
+- filters audit rows by event, audited model and audited model id
+- loads audited model options from the backend `system.audit.models` source
+- renders row-level create/update/delete payloads inside a closeable popover
+- supports click-to-filter tags for event, model and audited id columns
 - integrates audit rows with user avatars and the backend table definition
 
 ## Usage
@@ -44,15 +47,27 @@ Default export for the audit table page.
 
 Import: `@enso-ui/audit`
 
-### `Diff`
+### `Audit`
 
-Inline change renderer used by the audit table.
+Popover change renderer used by the audit table.
 
-Import: `@enso-ui/audit/src/bulma/pages/audit/components/Diff.vue`
+Import: `@enso-ui/audit/src/bulma/pages/audit/components/Audit.vue`
 
 Props:
 - `event: string` audit event type.
-- `changes: object` backend change payload.
+- `changes: object` backend create/update/delete payload.
+
+### `Model`
+
+Plain attribute renderer used for create/delete payloads.
+
+Import: `@enso-ui/audit/src/bulma/pages/audit/components/Model.vue`
+
+### `Updated`
+
+Before/after renderer used for update payloads.
+
+Import: `@enso-ui/audit/src/bulma/pages/audit/components/Updated.vue`
 
 ## Routes
 
@@ -64,11 +79,16 @@ Route group:
 Page:
 - `src/bulma/pages/audit/Index.vue`
 
+The model filter expects the companion backend source:
+
+- `system.audit.models`
+- `GET api/system/audit/models/options`
+
 ## Companion Backend Package
 
 - [`laravel-enso/audit`](https://docs.laravel-enso.com/backend/audit.html) [↗](https://github.com/laravel-enso/audit)
 
-The backend companion provides the audit table definition, diff payloads, and route group consumed by the page.
+The backend companion provides the audit table definition, audited model options, change payloads and route group consumed by the page.
 
 ## Depends On
 

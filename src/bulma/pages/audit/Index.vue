@@ -1,21 +1,29 @@
 <template>
-    <div class="wrapper">
+    <div class="audit-wrapper">
         <div class="columns is-centered is-multiline">
             <div class="column is-narrow">
-                <EnsoSelectFilter class="box action"
+                <EnsoSelectFilter class="box audit"
                     compact
-                    label="label"
-                    track-by="value"
-                    :options="eventOptions"
+                    :options="enums.auditEvent._select()"
                     :placeholder="i18n('Action')"
                     v-model="filters.audits.event"/>
             </div>
             <div class="column is-narrow">
-                <EnsoInputFilter class="box model"
+                <EnsoSelectFilter class="box model"
                     compact
+                    source="system.audit.models"
+                    track-by="value"
+                    label="label"
                     :name="i18n('Model')"
-                    label="Model"
+                    :placeholder="i18n('Model')"
                     v-model="filters.audits.auditable_type"/>
+            </div>
+            <div class="column is-narrow">
+                <EnsoInputFilter class="box id"
+                    compact
+                    :name="i18n('ID')"
+                    :label="i18n('ID')"
+                    v-model="filters.audits.auditable_id"/>
             </div>
         </div>
         <EnsoTable class="box p-0"
@@ -23,23 +31,27 @@
             :filter-version="1.2"
             id="audits">
             <template #event="{ column, row }">
-                <span class="tag is-warning">
+                <span class="tag is-clickable"
+                    :class="cssClass(row.event)"
+                    @click="filters.audits.event = row.event">
                     {{ column.enum._get(row.event) }}
                 </span>
             </template>
             <template #auditable_type="{ row }">
-                <span class="tag is-info is-light">
-                    {{ modelName(row.auditable_type) }}
+                <span class="tag is-dark is-clickable"
+                    @click="filters.audits.auditable_type = row.auditable_type">
+                    {{ row.auditable_type }}
                 </span>
             </template>
             <template #auditable_id="{ row }">
-                <span class="tag is-primary">
+                <span class="tag is-info is-clickable"
+                    @click="filters.audits.auditable_id = row.auditable_id">
                     {{ row.auditable_id }}
                 </span>
             </template>
             <template #changes="{ row }">
                 <div class="is-flex is-justify-content-center">
-                    <Diff :event="row.event"
+                    <Audit :event="row.event"
                         :changes="row.changes"/>
                 </div>
             </template>
@@ -54,12 +66,12 @@
 </template>
 
 <script setup>
-import { computed, inject, ref } from 'vue';
+import { inject, ref } from 'vue';
 import { EnsoInputFilter, EnsoSelectFilter } from '@enso-ui/filters/bulma';
 import { enums as useEnums } from '@enso-ui/enums/src/pinia/enums';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
-import Diff from './components/Diff.vue';
+import Audit from './components/Audit.vue';
 
 const i18n = inject('i18n');
 
@@ -69,22 +81,32 @@ const filters = ref({
     audits: {
         event: null,
         auditable_type: null,
+        auditable_id: null,
     },
 });
 
-const eventOptions = computed(() => enums.auditEvent?._filter() ?? []);
-
-const modelName = auditableType => auditableType?.split('\\').pop() ?? auditableType;
+const cssClass = type => {
+    switch (`${type}`) {
+    case enums.auditEvent.Created:
+        return 'is-success';
+    case enums.auditEvent.Updated:
+        return 'is-warning';
+    case enums.auditEvent.Deleted:
+        return 'is-danger';
+}};
 
 </script>
 
 <style lang="scss">
-.wrapper {
-    .vue-filter {
-        &.action,
-        &.model {
-            width: 15em;
-        }
+.audit-wrapper {
+    .select-filter.audit {
+        width: 15em;
+    }
+    .select-filter.model {
+        width: 25em;
+    }
+    .input-filter.id {
+        width: 10em;
     }
 }
 </style>
