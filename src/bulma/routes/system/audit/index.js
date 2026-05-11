@@ -6,6 +6,6 @@ export default {
     component: AuditIndex,
     meta: {
         breadcrumb: 'index',
-        title: 'Audits',
+        title: 'Audit',
     },
 };

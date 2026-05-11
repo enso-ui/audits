@@ -1,23 +1,23 @@
 {
-  "name": "@enso-ui/audits",
+  "name": "@enso-ui/audit",
   "version": "1.0.8",
   "description": "Audit table pages and diff presenters for Enso UI.",
   "main": "src/bulma/pages/audit/Index.vue",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enso-ui/audits.git"
+    "url": "git+https://github.com/enso-ui/audit.git"
   },
   "keywords": [
-    "audits",
+    "audit",
     "enso",
     "vue"
   ],
   "author": "Adrian Ocneanu <aocneanu@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enso-ui/audits/issues"
+    "url": "https://github.com/enso-ui/audit/issues"
   },
-  "homepage": "https://github.com/enso-ui/audits#readme",
+  "homepage": "https://github.com/enso-ui/audit#readme",
   "scripts": {
     "test": "vitest",
     "test:run": "vitest run"
