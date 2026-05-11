@@ -25,10 +25,17 @@
                     :label="i18n('ID')"
                     v-model="filters.audits.auditable_id"/>
             </div>
+            <div class="column is-narrow">
+                <EnsoDateFilter class="box"
+                    compact
+                    v-model:filter="dateFilter"
+                    v-model:interval="intervals.audits.created_at"/>
+            </div>
         </div>
         <EnsoTable class="box p-0"
             v-model:filters="filters"
-            :filter-version="1.2"
+            :intervals="intervals"
+            :filter-version="1.3"
             id="audits">
             <template #event="{ column, row }">
                 <span class="tag is-clickable"
@@ -66,8 +73,8 @@
 </template>
 
 <script setup>
-import { inject, ref } from 'vue';
-import { EnsoInputFilter, EnsoSelectFilter } from '@enso-ui/filters/bulma';
+import { inject, reactive, ref } from 'vue';
+import { EnsoDateFilter, EnsoInputFilter, EnsoSelectFilter } from '@enso-ui/filters/bulma';
 import { enums as useEnums } from '@enso-ui/enums/src/pinia/enums';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
@@ -77,11 +84,22 @@ const i18n = inject('i18n');
 
 const { enums } = useEnums();
 
+const dateFilter = ref('all');
+
 const filters = ref({
     audits: {
         event: null,
         auditable_type: null,
         auditable_id: null,
+    },
+});
+
+const intervals = reactive({
+    audits: {
+        created_at: {
+            max: null,
+            min: null,
+        },
     },
 });
 
