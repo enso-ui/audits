@@ -1,7 +1,7 @@
 # Audit
 
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/audit/blob/main/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-1.0.12-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/audit)
+[![Stable](https://img.shields.io/badge/stable-1.0.13-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/audit)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/audit.svg)](https://www.npmjs.com/package/@enso-ui/audit)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
@@ -27,10 +27,10 @@ This package is also available through the full `enso-ui` workspace bundle.
 ## Features
 
 - exports the audit index page used by the system route group
-- filters audit rows by event, audited model, audited model id and creation date
+- filters audit rows by event, audited model, audited model id, user and creation date
 - loads audited model options from the backend `system.audit.models` source
 - renders row-level create/update/delete payloads inside a closeable popover
-- supports click-to-filter tags for event, model and audited id columns
+- supports click-to-filter tags for event, model, audited id and user avatar columns
 - integrates audit rows with user avatars and the backend table definition
 
 ## Usage

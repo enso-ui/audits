@@ -26,6 +26,15 @@
                     v-model="filters.audits.auditable_id"/>
             </div>
             <div class="column is-narrow">
+                <EnsoSelectFilter class="box user"
+                    compact
+                    source="administration.users.options"
+                    label="person.name"
+                    :name="i18n('User')"
+                    :placeholder="i18n('User')"
+                    v-model="filters.audits.created_by"/>
+            </div>
+            <div class="column is-narrow">
                 <EnsoDateFilter class="box"
                     compact
                     v-model:filter="dateFilter"
@@ -35,7 +44,7 @@
         <EnsoTable class="box p-0"
             v-model:filters="filters"
             :intervals="intervals"
-            :filter-version="1.3"
+            :filter-version="1.4"
             id="audits">
             <template #event="{ column, row }">
                 <span class="tag is-clickable"
@@ -63,10 +72,13 @@
                 </div>
             </template>
             <template #createdBy="{ row }">
-                <Avatar class="is-24x24"
-                    tooltip
-                    :user="row.createdBy"
-                    v-if="row.createdBy"/>
+                <span class="is-inline-flex is-clickable"
+                    @click="filters.audits.created_by = row.createdBy.id"
+                    v-if="row.createdBy">
+                    <Avatar class="is-24x24"
+                        tooltip
+                        :user="row.createdBy"/>
+                </span>
             </template>
         </EnsoTable>
     </div>
@@ -91,6 +103,7 @@ const filters = ref({
         event: null,
         auditable_type: null,
         auditable_id: null,
+        created_by: null,
     },
 });
 
@@ -125,6 +138,9 @@ const cssClass = type => {
     }
     .input-filter.id {
         width: 10em;
+    }
+    .select-filter.user {
+        width: 18em;
     }
 }
 </style>
